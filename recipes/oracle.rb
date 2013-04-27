@@ -27,16 +27,9 @@ if jdk_version.instance_of? Fixnum
   jdk_version = jdk_version.to_s
 end
 
-case jdk_version
-when "6"
-  tarball_url = node['java']['jdk']['6'][arch]['url']
-  tarball_checksum = node['java']['jdk']['6'][arch]['checksum']
-  bin_cmds = node['java']['jdk']['6']['bin_cmds']
-when "7"
-  tarball_url = node['java']['jdk']['7'][arch]['url']
-  tarball_checksum = node['java']['jdk']['7'][arch]['checksum']
-  bin_cmds = node['java']['jdk']['7']['bin_cmds']
-end
+tarball_url = node['java']['jdk'][jdk_version][arch]['url']
+tarball_checksum = node['java']['jdk'][jdk_version][arch]['checksum']
+bin_cmds = node['java']['jdk'][jdk_version]['bin_cmds']
 
 if tarball_url =~ /example.com/
   Chef::Application.fatal!("You must change the download link to your private repository. You can no longer download java directly from http://download.oracle.com without a web broswer")
