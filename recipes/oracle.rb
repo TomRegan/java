@@ -31,10 +31,6 @@ tarball_url = node['java']['jdk'][jdk_version][arch]['url']
 tarball_checksum = node['java']['jdk'][jdk_version][arch]['checksum']
 bin_cmds = node['java']['jdk'][jdk_version]['bin_cmds']
 
-if tarball_url =~ /example.com/
-  Chef::Application.fatal!("You must change the download link to your private repository. You can no longer download java directly from http://download.oracle.com without a web broswer")
-end
-
 ruby_block  "set-env-java-home" do
   block do
     ENV["JAVA_HOME"] = java_home
